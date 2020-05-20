@@ -19,23 +19,31 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class CalculatorTests {
 
-	@Test
-	@DisplayName("1 + 1 = 2")
-	void addsTwoNumbers() {
-		Calculator calculator = new Calculator();
-		assertEquals(2, calculator.add(1, 1), "1 + 1 should equal 2");
-	}
+    @Test
+    //声明显示名
+    @DisplayName("1 + 1 = 2")
+    void addsTwoNumbers() {
+        Calculator calculator = new Calculator();
+		/*
+			message:验证未通过时显示的内容
+		 */
+        assertEquals(2, calculator.add(1, 1), "1 + 1 should equal 2");
+    }
 
-	@ParameterizedTest(name = "{0} + {1} = {2}")
-	@CsvSource({
-			"0,    1,   1",
-			"1,    2,   3",
-			"49,  51, 100",
-			"1,  100, 101"
-	})
-	void add(int first, int second, int expectedResult) {
-		Calculator calculator = new Calculator();
-		assertEquals(expectedResult, calculator.add(first, second),
-				() -> first + " + " + second + " should equal " + expectedResult);
-	}
+    /*
+        @ParameterizedTest:带参数测试
+        @CsvSource允许您将参数列表表示为以逗号分隔的值
+     */
+    @ParameterizedTest(name = "{0} + {1} = {2}")
+    @CsvSource({
+            "0,    1,   1",
+            "1,    2,   3",
+            "49,  51, 100",
+            "1,  100, 101"
+    })
+    void add(int first, int second, int expectedResult) {
+        Calculator calculator = new Calculator();
+        assertEquals(expectedResult, calculator.add(first, second),
+                () -> first + " + " + second + " should equal " + expectedResult);
+    }
 }
